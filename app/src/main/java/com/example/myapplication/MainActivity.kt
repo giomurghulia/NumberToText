@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import java.lang.Exception
+import java.lang.reflect.Executable
 
 class MainActivity : AppCompatActivity() {
     private lateinit var number: EditText
@@ -21,9 +23,14 @@ class MainActivity : AppCompatActivity() {
         resultText = findViewById(R.id.resultText)
 
         button.setOnClickListener {
-            val x = number.text.toString().toInt()
-            if (x > 1000000) resultText.text = "შეიყვანეთ 1000001 ზე ნაკლები"
-            else resultText.text = NumberInterpreter(x).readNumber()
+            try {
+                val x = number.text.toString().toInt()
+                if (x > 1000000) resultText.text = "შეიყვანეთ მილიონზე ნაკლები"
+                else resultText.text = NumberInterpreter(x).readNumber()
+
+            } catch (e: Exception) {
+                resultText.text = "შეიყვანეთ მილიონზე ნაკლები"
+            }
         }
     }
 }

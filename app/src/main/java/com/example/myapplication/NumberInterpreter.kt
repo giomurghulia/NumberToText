@@ -50,17 +50,7 @@ class NumberInterpreter(
 
     private fun readThousandPart(): String? {
         if (numberThousandPart == 0) return null
-        val numText = buildString {
-            append(
-                if (numberThousandPart / 20 != 0 && numberThousandPart % 20 != 0) {
-                    twentyKey[numberThousandPart / 20] + "და"
-                } else twentyKey[numberThousandPart / 20]
-            )
-            if (numberThousandPart != 1) append(mainNumberKey[numberThousandPart % 20])
-            if (numberThousandPart != 1) append(if (numberThousandPart % 20 <= 7 || numberThousandPart % 20 == 10) "ი" else "")
-            append("ათას")
-        }
-        return numText
+        return if (numberThousandPart != 1) NumberInterpreter(numberThousandPart).readNumber() + "ათას" else "ათას"
     }
 
     private fun readHundredPart(): String? {
